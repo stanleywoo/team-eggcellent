@@ -1,8 +1,7 @@
+from service.ImageUploadService import upload_image
 import json
 from flask import Flask, render_template, request, flash, redirect, session, send_from_directory, jsonify
 import os
-
-
 app = Flask(__name__)
 
 # export FLASK_APP=main
@@ -10,7 +9,6 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     return render_template('index.html')
-
 
 @app.route("/measurements", methods=['POST'])
 def upload_file():
@@ -28,10 +26,3 @@ def upload_file():
     else:
         return "Where is the image?"
 
-
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         return do_the_login()
-#     else:
-#         return show_the_login_form()
