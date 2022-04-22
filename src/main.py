@@ -3,7 +3,7 @@ from service.ImageUploadService import upload_image
 import json
 from flask import Flask, render_template, request, flash, redirect, session, send_from_directory, jsonify
 import os
-from service.object_size import getMeasurements
+from service.object_size import get_results
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -27,13 +27,12 @@ def upload_file():
         img = request.files['image']
         img_name = img.filename
         saved_path = os.path.join('./images', img_name)
-        ref_width = 4.00
         app.logger.info("saving {}".format(saved_path))
         img.save(saved_path)
-        result = getMeasurements(saved_path, ref_width)
+        result = get_results(saved_path)
         print(result)
         return jsonify(
-            message='we gucci. replace with image'
+            result
         )
 
     if request.method == 'GET':

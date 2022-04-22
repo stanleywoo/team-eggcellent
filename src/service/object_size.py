@@ -113,17 +113,24 @@ def getMeasurements(filePath, refWidth):
 		dimAFormated = "{:.1f}in".format(dimA)
 		dimBFormatted = "{:.1f}in".format(dimB)
 		resultSet.append([dimAFormated, dimBFormatted])
-		cv2.waitKey(0)
+		# cv2.waitKey(0)
 	return resultSet
 
+def get_results(filePath):
+	refWidth = 4.00
+	measurements = getMeasurements(filePath, refWidth)
+	results = [['inseam', measurements[1][0]], ['rise',  measurements[2][0]], ['waist', measurements[2][1]]]
+	print(results)
 
-# construct the argument parse and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True,
-	help="path to the input image")
-ap.add_argument("-w", "--width", type=float, required=True,
-	help="width of the left-most object in the image (in inches)")
-args = vars(ap.parse_args())
 
-result = getMeasurements(args["image"], args["width"])
-print(result)
+#
+# # construct the argument parse and parse the arguments
+# ap = argparse.ArgumentParser()
+# ap.add_argument("-i", "--image", required=True,
+# 	help="path to the input image")
+# ap.add_argument("-w", "--width", type=float, required=True,
+# 	help="width of the left-most object in the image (in inches)")
+# args = vars(ap.parse_args())
+#
+# result = get_results(args["image"])
+# print(result)
