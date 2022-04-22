@@ -3,6 +3,8 @@ import json
 from flask import Flask, render_template, request, flash, redirect, session, send_from_directory, jsonify
 import os
 app = Flask(__name__)
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 # export FLASK_APP=main
 # run flask run to run local server
