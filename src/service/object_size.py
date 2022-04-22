@@ -38,6 +38,7 @@ def getMeasurements(filePath, refWidth):
 	(cnts, _) = contours.sort_contours(cnts)
 	pixelsPerMetric = None
 
+	resultSet = []
 	# loop over the contours individually
 	for c in cnts:
 		# if the contour is not sufficiently large, ignore it
@@ -109,7 +110,11 @@ def getMeasurements(filePath, refWidth):
 
 		# show the output image
 		cv2.imshow("Image", orig)
+		dimAFormated = "{:.1f}in".format(dimA)
+		dimBFormatted = "{:.1f}in".format(dimB)
+		resultSet.append([dimAFormated, dimBFormatted])
 		cv2.waitKey(0)
+	return resultSet
 
 
 # construct the argument parse and parse the arguments
@@ -120,4 +125,5 @@ ap.add_argument("-w", "--width", type=float, required=True,
 	help="width of the left-most object in the image (in inches)")
 args = vars(ap.parse_args())
 
-getMeasurements(args["image"], args["width"])
+result = getMeasurements(args["image"], args["width"])
+print(result)
