@@ -109,7 +109,7 @@ def getMeasurements(filePath, refWidth):
 					0.65, (255, 255, 255), 2)
 
 		# show the output image
-		cv2.imshow("Image", orig)
+		# cv2.imshow("Image", orig)
 		dimAFormated = "{:.1f}in".format(dimA)
 		dimBFormatted = "{:.1f}in".format(dimB)
 		resultSet.append([dimAFormated, dimBFormatted])
