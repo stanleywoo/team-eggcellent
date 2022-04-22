@@ -19,13 +19,7 @@ def tutorial():
     return render_template('tutorial.html')
 
 
-@app.route("/measurements", methods=['POST'])
-def measurement():
-    if request.method == 'GET':
-        return render_template('measurements.html')
-
-
-@app.route("/measurements", methods=['POST'])
+@app.route("/measurements", methods=['POST', 'GET'])
 def upload_file():
     if request.method == 'POST' and request.files['image']:
         app.logger.info('./images')
@@ -37,5 +31,6 @@ def upload_file():
         return jsonify(
             message='we gucci. replace with image'
         )
-    else:
-        return "Where is the image?"
+
+    if request.method == 'GET':
+        return render_template('measurements.html')
