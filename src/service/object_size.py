@@ -120,7 +120,7 @@ def get_results(filePath):
 	refWidth = 4.00
 	measurements = getMeasurements(filePath, refWidth)
 	results = [['inseam', measurements[1][0]], ['rise',  measurements[2][0]], ['waist', measurements[2][1]]]
-	print(results)
+	return results
 
 
 #
