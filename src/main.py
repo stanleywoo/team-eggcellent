@@ -1,5 +1,5 @@
 import json
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, send_from_directory, jsonify
 import os
 
 
@@ -14,19 +14,19 @@ def hello_world():
 
 @app.route("/measurements", methods=['POST'])
 def upload_file():
-    if 'file' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
-
-    file = request.files['file']
-
-    if file.filename == '':
-        flash('No selected file')
-        return redirect(request.url)
-
-    filename = file.filename
-    file.save(os.path.join('./images', filename))
-    return json(filename)
+    if request.method == 'POST' and request.files['image']:
+        app.logger.info('./images')
+        img = request.files['image']
+        img_name = img.filename
+        saved_path = os.path.join('./images', img_name)
+        app.logger.info("saving {}".format(saved_path))
+        img.save(saved_path)
+        return jsonify(
+            message='we gucci. replace with image'
+        )
+        
+    else:
+        return "Where is the image?"
 
 
 # @app.route('/login', methods=['GET', 'POST'])
